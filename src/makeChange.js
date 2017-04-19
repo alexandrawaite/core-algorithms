@@ -5,30 +5,45 @@ export default function makeChange({price, amountGiven}) {
     "nickels": 0,
     "pennies": 0,
   };
+  
   var difference = amountGiven - price;
-  var quarterChange = difference/25;
-  var dimeChange = difference/10;
-  var nickelChange = difference/5;
-  var pennyChange = difference/1;
 
-    if (difference >= 25) {
-        difference -= 25;
-      change.quarters = Math.floor(quarterChange);
-    }
-      function dime() {}
-      difference -= 10;
-      change.dimes = Math.floor(dimeChange);
-    } else if (difference >= 5) {
-      function nickel() {
-      difference -= 5;
-      change.nickels = 1;
-    }
-    } else {
+  if (difference <= 0){
+    return change;
+  } else {
+    quarters(difference);
+  };
 
-      difference -= 1;
-      change.pennies = 1;
-    }
+
+  function quarters(difference){
+    var quarterTotal = Math.floor(difference/25);
+    difference -= (quarterTotal * 25);
+    change.quarters = quarterTotal;
+    dime(difference);
+};
+
+  function dime(difference){
+    var dimeTotal = Math.floor(difference/10);
+    difference -= (dimeTotal * 10);
+    change.dimes = dimeTotal;
+    nickel(difference);
+};
+
+  function nickel(difference) {
+     var nickelTotal = Math.floor(difference/5);
+     difference -= (nickelTotal * 5);
+     change.nickels = nickelTotal;
+     penny(difference);
+   };
+
+  function penny(difference){
+     var pennyTotal = Math.floor(difference/1);
+     difference -= (pennyTotal * 1);
+     change.pennies = pennyTotal;
+   };
 
   return change;
 };
+
+
 module.exports = makeChange
