@@ -5,7 +5,7 @@ export default function makeChange({price, amountGiven}) {
     "nickels": 0,
     "pennies": 0,
   };
-  
+
   var difference = amountGiven - price;
 
   if (difference <= 0){
@@ -13,7 +13,6 @@ export default function makeChange({price, amountGiven}) {
   } else {
     quarters(difference);
   };
-
 
   function quarters(difference){
     var quarterTotal = Math.floor(difference/25);
